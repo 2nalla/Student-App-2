@@ -1,0 +1,66 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewStudentGrades</title>
+    <script src="~/Scripts/angular.js"></script>
+    <script>
+        var app = angular.module("Myapp", []);
+        app.controller("practice", function ($scope) {
+            $scope.fnum = +(0);
+            $scope.lnum = +(0);
+            $scope.getvalues = function () {
+                $scope.sum = $scope.fnum + $scope.lnum;
+                $scope.avg = $scope.sum / 2;
+                $scope.getGrade();
+                $scope.DOB = "";
+                $scope.Age =(Date.now() - $scope.DOB.get);
+                   
+            }
+           
+            
+            $scope.getGrade = function () {
+                $scope.grade = "";
+                if($scope.avg >=70)
+                {
+                    $scope.grade = "Pass";
+                }
+                else {
+                    $scope.grade = "Fail";
+                }
+            }
+            
+        });
+
+    </script>
+</head>
+<body ng-app="Myapp">
+    <div ng-controller="practice"> 
+        <form name="frm">
+            FirstName: <input name="Text1" type="number" ng-model="fnum" required /> 
+            <span ng-show="frm.Text1.$touched&&frm.Text1.$invalid">Required!</span><br /><br />
+                  
+                LastName:  <input name="Text2" type="number" ng-model="lnum" required/>
+            <span ng-show="frm.Text2.$touched&&frm.Text2.$invalid">Required!</span><br /><br />
+
+            DOB: <input name="Text3" type="date" ng-model="DOB" required />
+            <span ng-show="frm.Text3.$touched&&frm.Text3.$invalid">Required!</span><br /><br />
+        </form>
+        
+        <input id="Button1" type="button" value="GetTotal" ng-click="getvalues()" />
+        
+        
+        <p>Sum:{{sum}}</p> 
+        <p>Avg:{{avg}}</p>
+        <p>Grade:{{grade}}</p>
+        <p>Age:{{Age}}</p>
+        
+    </div>
+</body>
+</html>
